@@ -13,6 +13,7 @@ let reactionTime = 0
 let stopkyNow = false
 let length = 15 //DÉLKA BĚHU 
 let speed = 0
+let measuring = false
 
 
 /*
@@ -68,6 +69,13 @@ basic.forever(function () {
     }
 
     if (kod == 3) {
+        kod = 0
+        time = 0
+        timeAndReactionTime = 0
+        reactionTime = 0 
+        speed = 0
+
+        measuring = true
         stopkyReact = true
         stopkyNow = true
         control.inBackground(function () {
@@ -83,7 +91,7 @@ basic.forever(function () {
         kod = 0
     }
 
-    if (input.lightLevel() <= LL / 2) {
+    if (measuring && input.lightLevel() <= LL / 2) {
         stopky = false
         stopkyReact = false
         stopkyNow = false
